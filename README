@@ -1,0 +1,101 @@
+CONTACT INFO:
+
+Jordan Brown
+jbrown94@u.rochester.edu
+CSC 172 FALL 2015
+Assignment: PROJECT 4
+
+REPORT DOCUMENTATION:
+
+NOTE: 
+	Everything works properly as planned, but there is seconds wait time for minimum spanning tree. 
+	For the minimum spanning tree, you must wait 4 to 5 seconds after clicking in the GUI and you must wait 
+	for 9 to 10 seconds for the minimum spanning tree to compute on the largest test graph file of monroe county.
+	When printing out all 19202 roads, it takes 19 seconds wait time to print them all out.
+
+	Once the printing operations are complete, my GUI appears. 
+
+For my Street Map Project, I implemented a Graph using a HashMap. The keys were Intersection id's and the values were
+the Intersections. The Intersections contained a list of their neighboring intersections, a unique id, and a road 
+list of connections to the adjacent intersections. In addition, the Intersection class contained information for
+the Dijkstra's algorithm implementation, including the distance, parent vertex, and whether it's shortest distance 
+was known or not. My Road class also held it's unique id, and it's connecting vertices. StreetMap class is an 
+intermediate class that takes the input file and generates a graph, and faciliates the print statements to the console. 
+Graph class contains methods needed to construct a graph and a main method to test a smaller scale graph for my 
+minimum spanning tree and dijkstra's algorith. 
+
+My Test class contains a main method to test my implementation of my graph. 
+
+For my Shortest Path Algorithm and Minimum Spanning Tree algorithm, I made use of java's Priority Queue implementation
+and therefore had both the Intersection and Road class implement Comparable, so I could define their natural ordering
+according to the intersection shortest distance and a road's distance. 
+
+My Graph class also contains a list of all roads, a list of a series of roads and intersections representing the 
+shortest path and a list of roads representing the minimum road. 
+
+When running my program, the GUI computes and draws the requirements in different tabs. Simply click on the tabs to 
+see the different graph requirements. The first tab is the initial 
+graph (meeting requirement 1), the second tab draws the shortest path graph in blue (meeting the second requirement),
+and the third graph draws the minimum spanning tree (meeting requirement 3). NOTE, you'll need to wait about
+4 to 5 seconds after you click on the minimum spanning tree tab for it to load fully on the largest test file, but 
+it works completely fine.
+
+My program also prints out the shortest path in a series of intersections and roads, then my program
+prints out the minimum spanning tree roads (NOTE, you must wait 9 to 10 seconds for the minimum spanning tree to finish
+computing for the largest test file, but it works completely fine.)
+
+
+
+REPORT RUN TIME ANALYSIS:
+
+	I chose to implement my Graph using a HashMap so I could retrieve, add, and get intersections in O(1) runtime. 
+	For drawing any map, it will take O(n) runtime since every point must be drawn.
+	
+	Although my implementation was very fast compared to using an adjacency vertex or adjacency list (with an array of
+	Linked List), I had to make a trade off between space and time complexity. I had to store my list of different roads
+	in three different linked list, and my Intersection class also had to contain a list of connecting Roads (meaning,
+	I had to store almost double the amount of roads in different places). However, I believe that the space trade off
+	was well worth it in that my implementation of Shortest Path Algorithm and retrieving vertices from my graph was
+	fast. My Minimum Spanning Tree algorithm was fast for medium sized inputs (in the 1000s), however it got slower
+	and takes about 9 to 10 seconds to run when scaling on larger inputs (discussed below). 
+	
+	Dijkstra's Weighted Shortest Path Algorithm:
+	Using pseudocode in the Weiss textbook for guidance, I was able to implement my algorithm using java's Priority Queue
+	(priority heap) and the runtime is extremely fast, running at O(|E|log|V|). For larger input, my weighted 
+	shortest path implementation scales well and computes quickly. 
+	
+	
+	Minimum Spanning Tree Algorithm:
+	Using Prim's algorithm, I was able to implement my minimum spanning tree algorithm by growing the tree in stages.
+	For larger input my algorithm is not fast and takes 9 to 10 seconds to completely compute for the 
+	Monroe County map. It takes about O(|V|^2) as is because I have to check to make sure the adjacent vertices I'm 
+	examinging are not already in the vertex tree (which is a linked list, so checking whether it contains an element
+	takes O(m), where m is the number of vertices in the vertex tree). However, after referring to the Weiss textbook, 
+	Prim's algorithm is almost exactly the same as dijkstra's, so for future implementations I will use this fact.
+	
+
+
+
+GENERAL INSTRUCTIONS ON COMPILING AND RUNNING CODE:
+
+1. Move project file to Desktop
+2. Open Command Prompt window
+3. Enter cd <Desktop> 
+4. Enter cd <Lab file name> 
+5. Enter cd src
+5. Enter javac *.java 
+6. Enter java <ClassName> <map's file location> <start Intersection ID> <end Intersection ID>
+
+Do not include angle brackets
+
+EXAMPLE INSTRUCTIONS FOR EACH PART:
+
+1. Move zip project file to Desktop
+2. Extract all files from zip project file
+3. Open Command Prompt window
+4. Enter cd Desktop 
+5. Enter cd Project4
+6. Enter cd src
+7. Enter javac *.java
+8. Enter java Test monroe-county.tab i1129924540 i212944752
+	... <output> ...
